@@ -1,0 +1,27 @@
+---
+route:
+  group_by:
+    - alertname
+  group_wait: 30s
+  group_interval: 5m
+  repeat_interval: 1h
+  receiver: email-notifications
+receivers:
+  - name: email-notifications
+    email_configs:
+      - to: tripathisaurav9702@gmail.com
+        from: Monitoring@example.com
+        smarthost: smtp.gmail.com:587
+        auth_username: tripathisaurav9702@gmail.com
+        auth_identity: tripathisaurav9702@gmail.com
+        auth_password: gjce done wfgh gwvx #generated app password
+        send_resolved: true
+inhibit_rules:
+  - source_match:
+      severity: critical
+    target_match:
+      severity: warning
+    equal:
+      - alertname
+      - dev
+      - instance
